@@ -1,5 +1,6 @@
 param(
-	[Parameter(Mandatory=$true)][string]$archiveID
+	[Parameter(Mandatory=$true)][string]$archiveID,
+	[string]$directory
 )
 # Dont show download progress
 $progressPreference = 'silentlyContinue'
@@ -13,10 +14,15 @@ $m3u = Invoke-RestMethod -Uri $m3uUrl
 $allMeta = Invoke-RestMethod -Uri $metaUrl
 $files = $allMeta.files
 $title = $allMeta.metadata.title
+
+# If no custom directory, use title
+if(!$directory) {
+	$directory = $title
+}
 echo $title
 
 # Create folder for concert silently
-New-Item -ItemType directory -Path $title -ErrorAction SilentlyContinue | Out-Null
+New-Item -ItemType directory -Path $directory -ErrorAction SilentlyContinue | Out-Null
 
 # Loop through all files 
 $counter = 1
@@ -28,7 +34,7 @@ foreach($line in $m3u.Split([Environment]::NewLine)) {
 	echo $fileTitle$extension
 	
 	# Download file
-	$output = "$title/$counter. $fileTitle$extension"
+	$output = "$directory/$counter. $fileTitle$extension"
 	Invoke-WebRequest -Uri $line -OutFile $output
 	$counter++;
 }
