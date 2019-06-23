@@ -3,7 +3,7 @@
 Powershell script for downloading concerts of The Grateful Dead and possibly others from the Internet Archive.
 
 ## Usage
-```
+```powershell
 .\download.ps1  
     [archiveID]
     [directory] (optional)
