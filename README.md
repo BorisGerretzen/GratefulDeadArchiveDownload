@@ -2,6 +2,8 @@
 # GratefulDeadArchiveDownload
 Powershell script for downloading concerts of The Grateful Dead and possibly others from the Internet Archive.
 
+It will create a new folder for the concert and all songs, numbers them, and puts them in the directory.
+
 ## Usage
 ```powershell
 .\download.ps1  
@@ -14,5 +16,3 @@ Powershell script for downloading concerts of The Grateful Dead and possibly oth
 
 **directory** is the directory where you want to download the files to. 
 If not supplied it will use the title of the concert.
-
-It will create a new folder for the concert and all songs, numbers them, and puts them in the directory.
