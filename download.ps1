@@ -30,6 +30,8 @@ foreach($line in $m3u.Split([Environment]::NewLine)) {
 	# Determine title and extension for saving
 	$fileName = Split-Path $line -leaf
 	$fileTitle = ($files | where {$_.name -eq $fileName}).title
+	[System.IO.Path]::GetInvalidFileNameChars() | % {$fileTitle = $fileTitle.replace($_,' ')}
+	$fileTitle = $fileTitle.trim()
 	$extension = [IO.Path]::GetExtension(($files | where {$_.name -eq $fileName}).name)
 	echo $fileTitle$extension
 	
